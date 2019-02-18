@@ -5,6 +5,9 @@
 
 // Augmented Declaration
 #include <vector>
+#include <iterator>
+#include <iostream>
+#include <algorithm>
 
 template <typename T>
 class FixedVector {
@@ -42,7 +45,19 @@ public:
 // return size_
 template <typename T>
 size_t FixedVector<T>::find(const T& value) {
-	// to be completed 
+	if (size_ = 0 || value != FixedVector) //Check if the array is empty or if the value is not in the FixedVector
+	{
+		return size_; //unable to find the value or the vector is empty.
+	}
+
+	else //see if value is in the object/array 
+	{
+		if (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector))) //if the value is found 
+		{
+			int i = std::distance(FixedVector, (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector)))) //get the index of the found value
+			return i;
+		}
+	}
 }
 
 // Function member to insert value in the FixedVector at index beforeIndex and return
@@ -59,7 +74,7 @@ size_t FixedVector<T>::insert(size_t beforeIndex, const T& value) {
 // Function member to test the equality between two FixedVectors
 // It returns true if the two FixedVectors are exactly the same, false otherwise
 template <typename T>
-bool FixedArray<T>::operator== (const FixedVector& rhs) {
+bool FixedVector<T>::operator== (const FixedVector& rhs) {
 	if (this != &rhs)
 	{
 		return false;
@@ -73,7 +88,7 @@ int main() {
 	// testing the new implementation of a FixedVector
 
 	// declare & initialize a FixedVector of int with 10 elements 
-	FixedVector<int> Array1(5);
+	FixedVector<int> Array1(5); //Note to self: Array1 is an object of FixedVector and can access its functions
 
 	// place 1,5,10 in the array
 	cout << “FixedArray gets the elements 1, 5, 10” << endl;
