@@ -90,7 +90,7 @@ bool FixedVector<T>::operator== (const FixedVector& rhs)
 template <typename T>
 size_t FixedVector<T>::insert(size_t beforeIndex, const T& value)
 {
-	capacity_ = Array1.max_size();
+	capacity_ = Array1.max_size(); //I'm not sure why Array1 isn't being found, since Array1 is calling the function
 	size_ = sizeof(Array1) / sizeof(Array1[0]); //size_ is the number of elements currently in the array
 	array_ = new int[size_ + 1]; //Dynamically allocating a new array with a size + 1 of the old array
 
