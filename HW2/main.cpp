@@ -8,6 +8,7 @@
 #include <iterator>
 #include <iostream>
 #include <algorithm>
+using namespace std;
 
 template <typename T>
 class FixedVector {
@@ -36,7 +37,7 @@ public:
 
 	// Overloaded Operators
 	FixedVector& operator= (const FixedVector& rhs);  //Copy assignment
-	bool operator== (const FixedVector& rhs)
+	bool operator== (const FixedVector& rhs);
 };
 
 // Function member to look for value in FixedVector
@@ -52,9 +53,9 @@ size_t FixedVector<T>::find(const T& value) {
 
 	else //see if value is in the object/array 
 	{
-		if (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector))) //if the value is found 
+		if (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector)) //if the value is found 
 		{
-			int i = std::distance(FixedVector, (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector)))) //get the index of the found value
+			int i = std::distance(FixedVector, (std::find(std::begin(FixedVector), std::end(FixedVector), value) != std::end(FixedVector))); //get the index of the found value
 			return i;
 		}
 	}
@@ -68,7 +69,7 @@ size_t FixedVector<T>::find(const T& value) {
 // If beforeIndex is >=size_ then display error and do not do any changes to FixedVector
 template <typename T>
 size_t FixedVector<T>::insert(size_t beforeIndex, const T& value) {
-	// to be completed
+	array_ = new int[capacity_ + 1]; //Dynamically allocating a new array with a size + 1 of the old array
 }
 
 // Function member to test the equality between two FixedVectors
@@ -91,16 +92,16 @@ int main() {
 	FixedVector<int> Array1(5); //Note to self: Array1 is an object of FixedVector and can access its functions
 
 	// place 1,5,10 in the array
-	cout << “FixedArray gets the elements 1, 5, 10” << endl;
+	cout << "FixedArray gets the elements 1, 5, 10" << endl;
 	Array1.push_back(1);
 	Array1.push_back(5);
 	Array1.push_back(10);
 
 	// Try the find operation
-	cout << “Value 5 is at index “ << Array1.find(5) << endl;
+	cout << "Value 5 is at index " << Array1.find(5) << endl;
 
 	// Try the insert operation
-	cout << “Value 2 is inserted at index” << Array1.insert(1, 2) << endl;
+	cout << "Value 2 is inserted at index" << Array1.insert(1, 2) << endl;
 
 	// Try the == operator
 	FixedVector<int> Array2(5);
@@ -108,14 +109,14 @@ int main() {
 	Array2.push_back(5);
 	Array2.push_back(10);
 	if (Array1 == Array2)
-		cout << “The two arrays are the same.” << endl;
+		cout << "The two arrays are the same." << endl;
 	else
-		cout << “The two arrays are different.” << endl;
+		cout << "The two arrays are different." << endl;
 
 	return 0;
 }
 
-Turn in the complete code, including all of the above “to be completed” sections.
-Test by running the main() function above and capture the console screen output, by attaching it as an captured image(use CTRL + PrtSc) or printed out as a file.
+//Turn in the complete code, including all of the above “to be completed” sections.
+//Test by running the main() function above and capture the console screen output, by attaching it as an captured image(use CTRL + PrtSc) or printed out as a file.
 
 
