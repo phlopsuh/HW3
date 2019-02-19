@@ -45,6 +45,7 @@ public:
 
 
 
+
 // Function member to look for value in FixedVector
 // If value is in the FixedVector, then return the index of FixedVector that contains 
 // the value. If size_ is 0 (array is empty) or the value is not in FixedVector, then
@@ -66,6 +67,20 @@ size_t FixedVector<T>::find(const T& value) {
 	}
 }
 
+
+// Function member to test the equality between two FixedVectors
+// It returns true if the two FixedVectors are exactly the same, false otherwise
+template <typename T>
+bool FixedVector<T>::operator== (const FixedVector& rhs) 
+{
+	if (this != &rhs)
+	{
+		return false;
+	}
+
+	return true;
+}
+
 // Function member to insert value in the FixedVector at index beforeIndex and return
 // beforeIndex
 // If beforeIndex is between 0 and size_, then insert the value by pushing all the
@@ -73,10 +88,10 @@ size_t FixedVector<T>::find(const T& value) {
 // If size would exceed capacity, then exit with an error
 // If beforeIndex is >=size_ then display error and do not do any changes to FixedVector
 template <typename T>
-size_t FixedVector<T>::insert(size_t beforeIndex, const T& value) 
+size_t FixedVector<T>::insert(size_t beforeIndex, const T& value)
 {
 	capacity_ = Array1.max_size();
-	size_ = sizeof(Array1)/sizeof(Array1[0]); //size_ is the number of elements currently in the array
+	size_ = sizeof(Array1) / sizeof(Array1[0]); //size_ is the number of elements currently in the array
 	array_ = new int[size_ + 1]; //Dynamically allocating a new array with a size + 1 of the old array
 
 	if (size_ > capacity_)
@@ -109,19 +124,6 @@ size_t FixedVector<T>::insert(size_t beforeIndex, const T& value)
 	}
 
 	return beforeIndex;
-} 
-
-// Function member to test the equality between two FixedVectors
-// It returns true if the two FixedVectors are exactly the same, false otherwise
-template <typename T>
-bool FixedVector<T>::operator== (const FixedVector& rhs) 
-{
-	if (this != &rhs)
-	{
-		return false;
-	}
-
-	return true;
 }
 
 
@@ -129,7 +131,7 @@ int main() {
 	// testing the new implementation of a FixedVector
 
 	// declare & initialize a FixedVector of int with 10 elements 
-	FixedVector<int> Array1(5); //Note to self: Array1 is an object of FixedVector and can access its functions
+	FixedVector<int> Array1(5); 
 
 	// place 1,5,10 in the array
 	cout << "FixedArray gets the elements 1, 5, 10" << endl;
@@ -141,7 +143,7 @@ int main() {
 	cout << "Value 5 is at index " << Array1.find(5) << endl;
 
 	// Try the insert operation
-	cout << "Value 2 is inserted at index" << Array1.insert(1, 2) << endl;
+	cout << "Value 2 is inserted at index" << Array1.insert(1,2) << endl;
 
 	// Try the == operator
 	FixedVector<int> Array2(5);
@@ -158,5 +160,6 @@ int main() {
 
 //Turn in the complete code, including all of the above “to be completed” sections.
 //Test by running the main() function above and capture the console screen output, by attaching it as an captured image(use CTRL + PrtSc) or printed out as a file.
+
 
 
