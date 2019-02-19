@@ -19,9 +19,12 @@ private:
 
 public:
 	// Constructors
-	FixedVector(size_t arraysize = 0);         // Also serves as default constructor
-	FixedVector(const FixedVector& input);    // Copy constructor
-	~FixedVector();
+	FixedVector(size_t arraysize = 0) {};        // Also serves as default constructor
+	FixedVector(const FixedVector& input) {};    // Copy constructor
+	~FixedVector()
+	{
+		delete array_;
+	}
 
 	// Getters / Setters
 	T& at(size_t index);
@@ -39,6 +42,8 @@ public:
 	FixedVector& operator= (const FixedVector& rhs);  //Copy assignment
 	bool operator== (const FixedVector& rhs);
 };
+
+
 
 // Function member to look for value in FixedVector
 // If value is in the FixedVector, then return the index of FixedVector that contains 
@@ -68,14 +73,49 @@ size_t FixedVector<T>::find(const T& value) {
 // If size would exceed capacity, then exit with an error
 // If beforeIndex is >=size_ then display error and do not do any changes to FixedVector
 template <typename T>
-size_t FixedVector<T>::insert(size_t beforeIndex, const T& value) {
-	array_ = new int[capacity_ + 1]; //Dynamically allocating a new array with a size + 1 of the old array
-}
+size_t FixedVector<T>::insert(size_t beforeIndex, const T& value) 
+{
+	capacity_ = Array1.max_size();
+	size_ = sizeof(Array1)/sizeof(Array1[0]); //size_ is the number of elements currently in the array
+	array_ = new int[size_ + 1]; //Dynamically allocating a new array with a size + 1 of the old array
+
+	if (size_ > capacity_)
+	{
+		cout << "Size exceeded capacity error." << endl;
+		exit(EXIT_FAILURE);
+	}
+
+	else if (beforeIndex >= size_)
+	{
+		cout << "Index not found in array." << endl;
+		delete[]array_;
+	}
+
+	else
+	{
+		int x = 0; //Index for Array1
+		for (int i = 0; i < size_; i++) // for loop to copy Array1 to dynamically allocated array
+		{
+			array_[i] = Array1[x];
+			++x;
+		}
+
+		for (int i = beforeIndex - 2; i >= 0; i--) //shift everything over to the right by 1 from beforeIndex position
+		{
+			array_[beforeIndex + 1] = array_[beforeIndex];
+		}
+
+		array_[beforeIndex] = value; //assign value to the beforeIndex position after shifting everything over
+	}
+
+	return beforeIndex;
+} 
 
 // Function member to test the equality between two FixedVectors
 // It returns true if the two FixedVectors are exactly the same, false otherwise
 template <typename T>
-bool FixedVector<T>::operator== (const FixedVector& rhs) {
+bool FixedVector<T>::operator== (const FixedVector& rhs) 
+{
 	if (this != &rhs)
 	{
 		return false;
